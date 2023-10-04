@@ -105,6 +105,7 @@ else:
         blank_removal = st.checkbox("Remove blank features?", False)
         if blank_removal:
             # Select true sample files (excluding blank and pools)
+            st.markdown("**Sample selection**")
             st.markdown(
                 "Select samples (excluding blank and pools) based on the following table."
             )
@@ -130,6 +131,7 @@ else:
             else:
                 v_space(1)
                 # Ask if blank removal should be done
+                st.markdown("**Blank selection**")
                 st.markdown(
                     "Select blanks (excluding samples and pools) based on the following table."
                 )
@@ -185,10 +187,13 @@ else:
             )
             imputation = c1.checkbox("Impute missing values?", False, help=f"These values will be filled with random number between 0 and {cutoff_LOD} (Limit of Detection) during imputation.")
             if imputation:
-                c1, c2 = st.columns(2)
-                ft = impute_missing_values(ft, cutoff_LOD)
-                with st.expander(f"Imputed data {ft.shape}"):
-                    show_table(ft, "imputed")
+                if cutoff_LOD > 1:
+                    c1, c2 = st.columns(2)
+                    ft = impute_missing_values(ft, cutoff_LOD)
+                    with st.expander(f"Imputed data {ft.shape}"):
+                        show_table(ft, "imputed")
+                else:
+                    st.warning(f"Can't impute with random values between 1 and lowest value, which is {cutoff_LOD} (rounded).")
 
             st.markdown("##### Normalization")
             normalization_method = st.selectbox("data normalization method", ["Center-Scaling", 
