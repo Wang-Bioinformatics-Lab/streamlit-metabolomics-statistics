@@ -14,7 +14,8 @@ dataframe_names = ("md",
                    "df_important_features",
                    "df_oob",
                    "ft_gnps",
-                   "md_gnps")
+                   "md_gnps",
+                   "df_gnps_annotations")
 
 corrections_map = {"Bonferroni": "bonf",
                    "Sidak": "sidak",
@@ -124,13 +125,6 @@ def show_table(df, title="", col="", download=True):
         col = col
     else:
         col = st
-    if download:
-        col.download_button(
-            f"Download Table",
-            df.to_csv(sep="\t").encode("utf-8"),
-            title.replace(" ", "-") + ".tsv",
-            key=uuid.uuid1(),
-        )
     col.dataframe(df, use_container_width=True)
 
 
