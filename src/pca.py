@@ -10,7 +10,8 @@ def get_pca_df(scaled, n=5):
     # calculating Principal components
     pca = PCA(n_components=n)
     pca_df = pd.DataFrame(
-        data=pca.fit_transform(scaled), columns=[f"PC{x}" for x in range(1, n + 1)]
+        data=pca.fit_transform(scaled), 
+        columns=[f"PC{x}" for x in range(1, n + 1)]
     )
     pca_df.index = scaled.index
     return pca.explained_variance_ratio_, pca_df
