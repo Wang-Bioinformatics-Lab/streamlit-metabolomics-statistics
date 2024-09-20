@@ -7,7 +7,7 @@ from streamlit.components.v1 import html
 page_setup()
 
 # Add a tracking token
-html('<script async defer data-ebsite-id="cf2d4190-22ed-4bfe-8913-8b87daca9038" src="https://analytics.gnps2.org/umami.js"></script>', width=0, height=0)
+html('<script async defer data-website-id="cf2d4190-22ed-4bfe-8913-8b87daca9038" src="https://analytics.gnps2.org/umami.js"></script>', width=0, height=0)
 
 
 st.image("assets/FBMN-STATS-GUIed_logo2.png", use_column_width=True)
